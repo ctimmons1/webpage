@@ -14,9 +14,6 @@ output:
 Comments in HTML are like this! 
 -->
 
-
-Hello, Website! 
-
 # My first section
 
 ```{r}
