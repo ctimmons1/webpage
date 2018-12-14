@@ -1,31 +1,85 @@
 ---
-title: "Caitlin's Website"
-author: "Caitlin Timmons"
+title: "My Final Project"
+author: "Caitlin Timmons, Sarah Weden, Kendall Al-Bashir"
 date: "Last updated on `r Sys.Date()`"
 output:
   html_document:
+    code_folding: hide
     toc: true
     toc_depth: 2
     toc_float: true
     df_print: kable
 ---
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, message = FALSE, warning = FALSE, 
+  fig.width = 16/2, fig.height = 9/2)
+```
+
 <!--
 Comments in HTML are like this! 
 -->
 
-# My first section
+# SECTION NAME
 
-```{r}
-library(ggplot2)
-ggplot(mtcars, aes(x=cyl, y= mpg)) +
-  geom_point() +
-  labs(x= "Number of cylinders", y = "Miles per gallon")
+Write your blog post here.
+
+``` {r, echo =TRUE, message =FALSE, warning =FALSE}
+library(tidyverse)
+library(leaflet)
+library(sf)
+library(readxl)
+library(maps)
+library(USAboundaries)
+
+us_counties <- us_counties(map_date = NULL, resolution = c("high"), states = NULL) %>%
+  select(name, state_abbr) %>%
+  mutate("State_ID" = state_abbr, "County" = name) %>%
+  filter(State_ID != "GU", State_ID != "VI", State_ID != "PR", State_ID != "AS", State_ID != "MP", State_ID != "HI", State_ID != "AK") 
+
+
+USA_sf <- maps::map("state", plot = FALSE, fill = TRUE) %>%
+  sf::st_as_sf() %>%
+  sf::st_transform(4326) %>%
+  mutate("State" = ID) %>%
+  select(-ID)
+
+
+pipeline_spills <- pipeline_spills <- read_excel("database.xlsx") %>%
+  unite(col = "Accident_Location", c("Accident_City", "Accident_State"), sep = ", ", remove = FALSE) %>%
+  mutate("State_ID" = Accident_State, "Barrels_Gallons" = Unintentional_Release_Barrels*42) %>%
+  separate(col = Operator_Name, into = c("Operator_General"), sep = " ", remove = FALSE, convert = FALSE, 
+           extra = "drop", fill = "warn") %>%
+  filter(Environmental_Remediation_Costs > 0, Longitude < -60)
+
 ```
 
 
-# My second section
+``` {r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 10, fig.height = 10}
+pal_1 <- colorFactor(palette = "Set1", domain = pipeline_spills$Cause_Category)
 
-```{r}
-head(mtcars)
+leaflet(data = pipeline_spills) %>%
+  setView(-96, 37.8, 4) %>%
+  setMaxBounds(-150, 25, -60, 50) %>%  
+  addLayersControl(baseGroups = c("Environmental Remediation Costs ($)", "Oil Release (Gallons)"),
+                   position = "topleft",
+                   options = layersControlOptions(collapsed = FALSE, autoZIndex = TRUE)) %>%  
+  addProviderTiles(provider = "Esri.WorldStreetMap") %>%
+  addCircles(lng = ~Longitude, lat = ~Latitude, 
+             radius = ~Environmental_Remediation_Costs/200,
+             color = ~pal_1(Cause_Category),
+             popup = ~Operator_Name,
+             label = ~Accident_Location,
+             opacity = 0.8,
+             group = "Environmental Remediation Costs ($)") %>%
+  addCircles(lng = ~Longitude, lat = ~Latitude, 
+             radius = ~Barrels_Gallons,
+             color = ~pal_1(Cause_Category),
+             popup = ~Operator_Name,
+             label = ~Accident_Location,
+             opacity = 0.8,
+             group = "Oil Release (Gallons)") %>%
+  addLegend(position = "bottomleft", pal = pal_1, values = ~Cause_Category, title = "Cause of Spill")
+
 ```

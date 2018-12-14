@@ -1,0 +1,121 @@
+---
+title: "More information"
+author: "Guy Incognito"
+date: "Last updated on `r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    df_print: kable
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, message = FALSE, warning = FALSE, 
+  fig.width = 16/2, fig.height = 9/2)
+```
+
+<!--
+Comments in HTML are like this! 
+-->
+
+# SECTION NAME
+
+Write your "more information" section here.
+
+``` {r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 10, fig.height = 10}
+library(tidyverse)
+library(leaflet)
+library(sf)
+library(readxl)
+library(maps)
+library(USAboundaries)
+
+us_counties <- us_counties(map_date = NULL, resolution = c("high"), states = NULL) %>%
+  select(name, state_abbr) %>%
+  mutate("State_ID" = state_abbr, "County" = name) %>%
+  filter(State_ID != "GU", State_ID != "VI", State_ID != "PR", State_ID != "AS", State_ID != "MP", State_ID != "HI", State_ID != "AK") 
+
+
+USA_sf <- maps::map("state", plot = FALSE, fill = TRUE) %>%
+  sf::st_as_sf() %>%
+  sf::st_transform(4326) %>%
+  mutate("State" = ID) %>%
+  select(-ID)
+
+
+pipeline_spills <- pipeline_spills <- read_excel("database.xlsx") %>%
+  unite(col = "Accident_Location", c("Accident_City", "Accident_State"), sep = ", ", remove = FALSE) %>%
+  mutate("State_ID" = Accident_State, "Barrels_Gallons" = Unintentional_Release_Barrels*42) %>%
+  separate(col = Operator_Name, into = c("Operator_General"), sep = " ", remove = FALSE, convert = FALSE, 
+           extra = "drop", fill = "warn") %>%
+  filter(Environmental_Remediation_Costs > 0, Longitude < -60)
+
+```
+
+```{r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 10, fig.height = 10}
+
+pipeline_operators <- pipeline_spills %>%
+  group_by(Operator_General) %>%
+  summarize(n_spills = n()) %>%
+  filter(n_spills > 5) %>%
+  inner_join(pipeline_spills, by = "Operator_General") 
+
+ggplot(data = pipeline_operators, mapping = aes(x = Environmental_Remediation_Costs, fill = Cause_Category)) +
+  geom_histogram(colour = "black") +
+  scale_color_discrete(guide = FALSE) +
+  scale_x_log10() +
+  scale_fill_manual(breaks = c("MATERIAL/WELD/EQUIP FAILURE", "CORROSION", "INCORRECT OPERATION", "ALL OTHER CAUSES", "EXCAVATION DAMAGE", "NATURAL FORCE DAMAGE", "OTHER OUTSIDE FORCE DAMAGE"), 
+         values=c("#ff7f00", "#377eb8", "#984ea3", "#e41a1c", "#4daf4a", "#ffff33", "#a65628")) +
+  labs(title = "How much oil spills from each cause category cost the environment", subtitle = "Onshore oil spill data in the U.S from 2010-present. 
+Histogram shows which cost range oil spills from each category fell into, as well as which causes resulted in the most oil spills.", x = "Environmental Remediation Costs ($)", y = "Number of Spills", fill = "Cause of Spill") 
+```
+
+
+```{r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 10, fig.height = 10}
+
+pipeline_barrels <- pipeline_operators %>%
+  group_by(Operator_General) %>%
+  summarize(Sum_Gallons = sum(Barrels_Gallons)) %>%
+  mutate(Operator_General = reorder(Operator_General, -Sum_Gallons)) %>%
+  filter(Sum_Gallons > 1000)
+
+ggplot(data = pipeline_barrels, mapping = aes(x = Operator_General, y = Sum_Gallons)) +
+  geom_col(fill = "red") +
+  coord_flip() +
+  scale_fill_discrete(guide = FALSE) +
+  labs(title = "Which Corporations Spilled the Most Oil?", subtitle = "Barplot representing the total gallons of oil released by most culpable corporations from 2010-present.", y = "Total Oil Released (Gallons)", x = "Corporation Name")
+
+```
+
+
+``` {r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 12, fig.height = 12}
+
+pollution <- read_excel("pollution.xlsx") %>%
+  separate(col = Date_Local, into = c("Year", "Month", "Day"), sep = "-", 
+           convert = FALSE, extra = "warn", fill = "warn") %>%
+  select(-c(Address, City, NO2_Units, CO_Units, O3_Units)) %>%
+  group_by(County, Year) %>%
+  summarize(mean_NO2 = mean(NO2_Mean)) %>%
+  right_join(us_counties, by = "County") %>%
+  select(-c(name, state_abbr)) %>%
+  drop_na()
+
+pipeline_spills_sf <- pipeline_spills %>%
+  filter(Longitude >= -130) %>%
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) 
+
+ggplot() +
+  geom_sf(data = USA_sf) +
+  geom_sf(data = pollution, aes(fill = mean_NO2)) +
+  scale_fill_continuous(low = "yellow", high = "darkred", 
+                        space = "Lab", na.value = "white",         
+                        guide = "colourbar", aesthetics = "fill") +
+  geom_sf(data = pipeline_spills_sf, size = 0.5, col = "blue") +
+  coord_sf(crs = 4326) +
+  labs(title = "Relationship Between Pollution Levels and Pipeline Spills", 
+       subtitle = "Mean nitrogen dioxide release by county from 2000-2016, plotted against occurrances of oil pipeline spills from 2010-present", x = "Longitude", y = "Latitude", fill = "Mean NO2 Release (Parts Per Billion")
+
+```
