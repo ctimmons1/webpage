@@ -1,5 +1,5 @@
 ---
-title: "My Final Project"
+title: "The Environmental Impact of Oil Pipeline Spills"
 author: "Caitlin Timmons, Sarah Weden, Kendall Al-Bashir"
 date: "Last updated on `r Sys.Date()`"
 output:

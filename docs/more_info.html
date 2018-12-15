@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Guy Incognito" />
+
+
+<title>The Environmental Impact of Oil Pipeline Spills</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Final Project Title</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Blogpost</a>
+</li>
+<li>
+  <a href="more_info.html">More info</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">The Environmental Impact of Oil Pipeline Spills</h1>
+<h4 class="author"><em>Guy Incognito</em></h4>
+<h4 class="date"><em>Last updated on 2018-12-15</em></h4>
+
+</div>
+
+
+<!--
+Comments in HTML are like this! 
+-->
+<div id="section-name" class="section level1">
+<h1>SECTION NAME</h1>
+<p>Write your “more information” section here.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(leaflet)
+<span class="kw">library</span>(sf)
+<span class="kw">library</span>(readxl)
+<span class="kw">library</span>(maps)
+<span class="kw">library</span>(USAboundaries)
+
+us_counties &lt;-<span class="st"> </span><span class="kw">us_counties</span>(<span class="dt">map_date =</span> <span class="ot">NULL</span>, <span class="dt">resolution =</span> <span class="kw">c</span>(<span class="st">&quot;high&quot;</span>), <span class="dt">states =</span> <span class="ot">NULL</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(name, state_abbr) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">&quot;State_ID&quot;</span> =<span class="st"> </span>state_abbr, <span class="st">&quot;County&quot;</span> =<span class="st"> </span>name) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(State_ID <span class="op">!=</span><span class="st"> &quot;GU&quot;</span>, State_ID <span class="op">!=</span><span class="st"> &quot;VI&quot;</span>, State_ID <span class="op">!=</span><span class="st"> &quot;PR&quot;</span>, State_ID <span class="op">!=</span><span class="st"> &quot;AS&quot;</span>, State_ID <span class="op">!=</span><span class="st"> &quot;MP&quot;</span>, State_ID <span class="op">!=</span><span class="st"> &quot;HI&quot;</span>, State_ID <span class="op">!=</span><span class="st"> &quot;AK&quot;</span>) 
+
+
+USA_sf &lt;-<span class="st"> </span>maps<span class="op">::</span><span class="kw">map</span>(<span class="st">&quot;state&quot;</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>sf<span class="op">::</span><span class="kw">st_as_sf</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>sf<span class="op">::</span><span class="kw">st_transform</span>(<span class="dv">4326</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">&quot;State&quot;</span> =<span class="st"> </span>ID) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>ID)
+
+
+pipeline_spills &lt;-<span class="st"> </span>pipeline_spills &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;database.xlsx&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> <span class="st">&quot;Accident_Location&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Accident_City&quot;</span>, <span class="st">&quot;Accident_State&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;, &quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">&quot;State_ID&quot;</span> =<span class="st"> </span>Accident_State, <span class="st">&quot;Barrels_Gallons&quot;</span> =<span class="st"> </span>Unintentional_Release_Barrels<span class="op">*</span><span class="dv">42</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> Operator_Name, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;Operator_General&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>, <span class="dt">convert =</span> <span class="ot">FALSE</span>, 
+           <span class="dt">extra =</span> <span class="st">&quot;drop&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;warn&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Environmental_Remediation_Costs <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, Longitude <span class="op">&lt;</span><span class="st"> </span><span class="op">-</span><span class="dv">60</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pipeline_operators &lt;-<span class="st"> </span>pipeline_spills <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Operator_General) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n_spills =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(n_spills <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">inner_join</span>(pipeline_spills, <span class="dt">by =</span> <span class="st">&quot;Operator_General&quot;</span>) 
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> pipeline_operators, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Barrels_Gallons, <span class="dt">y =</span> Environmental_Remediation_Costs)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="dv">1</span>, <span class="dt">height =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correlation between amount of oil spillage and cost to the environment&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Gallons of oil released in each pipeline spill versus the environmental remediation costs of the spill. </span>
+<span class="st">Regression line demonstrates positive trend.&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Oil Released (Gallons)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Environmental Remediation Costs ($)&quot;</span>)</code></pre></div>
+<p><img src="more_info_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pipeline_operators, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Environmental_Remediation_Costs, <span class="dt">fill =</span> Cause_Category)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">guide =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;MATERIAL/WELD/EQUIP FAILURE&quot;</span>, <span class="st">&quot;CORROSION&quot;</span>, <span class="st">&quot;INCORRECT OPERATION&quot;</span>, <span class="st">&quot;ALL OTHER CAUSES&quot;</span>, <span class="st">&quot;EXCAVATION DAMAGE&quot;</span>, <span class="st">&quot;NATURAL FORCE DAMAGE&quot;</span>, <span class="st">&quot;OTHER OUTSIDE FORCE DAMAGE&quot;</span>), 
+         <span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#ff7f00&quot;</span>, <span class="st">&quot;#377eb8&quot;</span>, <span class="st">&quot;#984ea3&quot;</span>, <span class="st">&quot;#e41a1c&quot;</span>, <span class="st">&quot;#4daf4a&quot;</span>, <span class="st">&quot;#ffff33&quot;</span>, <span class="st">&quot;#a65628&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;How much oil spills from each cause category cost the environment&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Onshore oil spill data in the U.S from 2010-present. </span>
+<span class="st">Histogram shows which cost range oil spills from each category fell into, as well as which causes resulted in the most oil spills.&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Environmental Remediation Costs ($)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Number of Spills&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Cause of Spill&quot;</span>) </code></pre></div>
+<p><img src="more_info_files/figure-html/unnamed-chunk-3-2.png" width="960" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pipeline_barrels &lt;-<span class="st"> </span>pipeline_operators <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Operator_General) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Sum_Gallons =</span> <span class="kw">sum</span>(Barrels_Gallons)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Operator_General =</span> <span class="kw">reorder</span>(Operator_General, <span class="op">-</span>Sum_Gallons)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Sum_Gallons <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000</span>)
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> pipeline_barrels, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Operator_General, <span class="dt">y =</span> Sum_Gallons)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="dt">guide =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Which Corporations Spilled the Most Oil?&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Barplot representing the total gallons of oil released by most culpable corporations from 2010-present.&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total Oil Released (Gallons)&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Corporation Name&quot;</span>)</code></pre></div>
+<p><img src="more_info_files/figure-html/unnamed-chunk-4-1.png" width="960" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollution &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;pollution.xlsx&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> Date_Local, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Month&quot;</span>, <span class="st">&quot;Day&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>, 
+           <span class="dt">convert =</span> <span class="ot">FALSE</span>, <span class="dt">extra =</span> <span class="st">&quot;warn&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;warn&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(County, Year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_NO2 =</span> <span class="kw">mean</span>(NO2_Mean)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">right_join</span>(us_counties, <span class="dt">by =</span> <span class="st">&quot;County&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(name, state_abbr)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">drop_na</span>()
+
+pipeline_spills_sf &lt;-<span class="st"> </span>pipeline_spills <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Longitude <span class="op">&gt;=</span><span class="st"> </span><span class="op">-</span><span class="dv">130</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Latitude&quot;</span>), <span class="dt">crs =</span> <span class="dv">4326</span>) 
+
+<span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> USA_sf) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> pollution, <span class="kw">aes</span>(<span class="dt">fill =</span> mean_NO2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_continuous</span>(<span class="dt">low =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;darkred&quot;</span>, 
+                        <span class="dt">space =</span> <span class="st">&quot;Lab&quot;</span>, <span class="dt">na.value =</span> <span class="st">&quot;white&quot;</span>,         
+                        <span class="dt">guide =</span> <span class="st">&quot;colourbar&quot;</span>, <span class="dt">aesthetics =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> pipeline_spills_sf, <span class="dt">size =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">4326</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Relationship Between Pollution Levels and Pipeline Spills&quot;</span>, 
+       <span class="dt">subtitle =</span> <span class="st">&quot;Mean nitrogen dioxide release by county from 2000-2016, plotted against occurrances of oil pipeline spills from 2010-present&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Mean NO2 Release (Parts Per Billion&quot;</span>)</code></pre></div>
+<p><img src="more_info_files/figure-html/unnamed-chunk-5-1.png" width="1152" /></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

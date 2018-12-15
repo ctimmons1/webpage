@@ -1,5 +1,5 @@
 ---
-title: "More information"
+title: "The Environmental Impact of Oil Pipeline Spills"
 author: "Guy Incognito"
 date: "Last updated on `r Sys.Date()`"
 output:
@@ -63,6 +63,14 @@ pipeline_operators <- pipeline_spills %>%
   filter(n_spills > 5) %>%
   inner_join(pipeline_spills, by = "Operator_General") 
 
+ggplot(data = pipeline_operators, mapping = aes(x = Barrels_Gallons, y = Environmental_Remediation_Costs)) +
+  geom_jitter(width = 1, height = 1, alpha = 0.5) +
+  geom_smooth(method = lm) +
+  scale_y_log10() +
+  scale_x_log10() +
+  labs(title = "Correlation between amount of oil spillage and cost to the environment", subtitle = "Gallons of oil released in each pipeline spill versus the environmental remediation costs of the spill. 
+Regression line demonstrates positive trend.", x = "Oil Released (Gallons)", y = "Environmental Remediation Costs ($)")
+
 ggplot(data = pipeline_operators, mapping = aes(x = Environmental_Remediation_Costs, fill = Cause_Category)) +
   geom_histogram(colour = "black") +
   scale_color_discrete(guide = FALSE) +
@@ -96,7 +104,6 @@ ggplot(data = pipeline_barrels, mapping = aes(x = Operator_General, y = Sum_Gall
 pollution <- read_excel("pollution.xlsx") %>%
   separate(col = Date_Local, into = c("Year", "Month", "Day"), sep = "-", 
            convert = FALSE, extra = "warn", fill = "warn") %>%
-  select(-c(Address, City, NO2_Units, CO_Units, O3_Units)) %>%
   group_by(County, Year) %>%
   summarize(mean_NO2 = mean(NO2_Mean)) %>%
   right_join(us_counties, by = "County") %>%
