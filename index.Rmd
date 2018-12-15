@@ -5,6 +5,7 @@ date: "Last updated on `r Sys.Date()`"
 output:
   html_document:
     code_folding: hide
+    theme: paper
     toc: true
     toc_depth: 2
     toc_float: true
@@ -21,9 +22,10 @@ knitr::opts_chunk$set(
 Comments in HTML are like this! 
 -->
 
-# SECTION NAME
+# An Introduction to Pipeline Spills and Their Environmental Impact
 
-Write your blog post here.
+One can visualize where these spills are occuring, what caused them, which corporations are causing them, how severe the spill itself was, and begin to glimpse the environmental repercussions. The viewer should note that radii on both maps denote values relative to other values on the same map, not on the other map. For instance, radii on the basemap showing the environmental remediation costs for each oil spill represent the dollar amount which was divided by 100, for clarity, while radii on the oil release map correspond to the gallons of oil released by each pipeline spill. To continue exploring questions of environmental repercussions and corporate accountability, keep reading!
+
 
 ``` {r, echo =TRUE, message =FALSE, warning =FALSE}
 library(tidyverse)
@@ -56,7 +58,7 @@ pipeline_spills <- pipeline_spills <- read_excel("database.xlsx") %>%
 ```
 
 
-``` {r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 10, fig.height = 10}
+``` {r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 8, fig.height = 8}
 pal_1 <- colorFactor(palette = "Set1", domain = pipeline_spills$Cause_Category)
 
 leaflet(data = pipeline_spills) %>%
@@ -80,6 +82,6 @@ leaflet(data = pipeline_spills) %>%
              label = ~Accident_Location,
              opacity = 0.8,
              group = "Oil Release (Gallons)") %>%
-  addLegend(position = "bottomleft", pal = pal_1, values = ~Cause_Category, title = "Cause of Spill")
+  addLegend(position = "topright", pal = pal_1, values = ~Cause_Category, title = "Cause of Spill")
 
 ```

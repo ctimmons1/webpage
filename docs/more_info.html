@@ -9,14 +9,14 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Guy Incognito" />
+<meta name="author" content="Caitlin Timmons, Sarah Weden, Kendall Al-Bashir" />
 
 
 <title>The Environmental Impact of Oil Pipeline Spills</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -136,34 +136,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 64px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 </style>
 
@@ -344,7 +344,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">The Environmental Impact of Oil Pipeline Spills</h1>
-<h4 class="author"><em>Guy Incognito</em></h4>
+<h4 class="author"><em>Caitlin Timmons, Sarah Weden, Kendall Al-Bashir</em></h4>
 <h4 class="date"><em>Last updated on 2018-12-15</em></h4>
 
 </div>
@@ -353,8 +353,8 @@ div.tocify {
 <!--
 Comments in HTML are like this! 
 -->
-<div id="section-name" class="section level1">
-<h1>SECTION NAME</h1>
+<div id="liquid-gold-oils-expense-on-the-environment" class="section level1">
+<h1>“Liquid Gold”: Oil’s Expense On the Environment</h1>
 <p>Write your “more information” section here.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(leaflet)
@@ -389,22 +389,16 @@ pipeline_spills &lt;-<span class="st"> </span>pipeline_spills &lt;-<span class="
 <span class="st">  </span><span class="kw">inner_join</span>(pipeline_spills, <span class="dt">by =</span> <span class="st">&quot;Operator_General&quot;</span>) 
 
 <span class="kw">ggplot</span>(<span class="dt">data =</span> pipeline_operators, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Barrels_Gallons, <span class="dt">y =</span> Environmental_Remediation_Costs)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="dv">1</span>, <span class="dt">height =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.3</span>, <span class="dt">height =</span> <span class="fl">0.3</span>, <span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_log10</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correlation between amount of oil spillage and cost to the environment&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Gallons of oil released in each pipeline spill versus the environmental remediation costs of the spill. </span>
 <span class="st">Regression line demonstrates positive trend.&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Oil Released (Gallons)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Environmental Remediation Costs ($)&quot;</span>)</code></pre></div>
 <p><img src="more_info_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pipeline_operators, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Environmental_Remediation_Costs, <span class="dt">fill =</span> Cause_Category)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">guide =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;MATERIAL/WELD/EQUIP FAILURE&quot;</span>, <span class="st">&quot;CORROSION&quot;</span>, <span class="st">&quot;INCORRECT OPERATION&quot;</span>, <span class="st">&quot;ALL OTHER CAUSES&quot;</span>, <span class="st">&quot;EXCAVATION DAMAGE&quot;</span>, <span class="st">&quot;NATURAL FORCE DAMAGE&quot;</span>, <span class="st">&quot;OTHER OUTSIDE FORCE DAMAGE&quot;</span>), 
-         <span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#ff7f00&quot;</span>, <span class="st">&quot;#377eb8&quot;</span>, <span class="st">&quot;#984ea3&quot;</span>, <span class="st">&quot;#e41a1c&quot;</span>, <span class="st">&quot;#4daf4a&quot;</span>, <span class="st">&quot;#ffff33&quot;</span>, <span class="st">&quot;#a65628&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;How much oil spills from each cause category cost the environment&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Onshore oil spill data in the U.S from 2010-present. </span>
-<span class="st">Histogram shows which cost range oil spills from each category fell into, as well as which causes resulted in the most oil spills.&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Environmental Remediation Costs ($)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Number of Spills&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Cause of Spill&quot;</span>) </code></pre></div>
-<p><img src="more_info_files/figure-html/unnamed-chunk-3-2.png" width="960" /></p>
+</div>
+<div id="who-is-responsible-for-the-environmental-damage" class="section level1">
+<h1>Who Is Responsible for the Environmental Damage?</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pipeline_barrels &lt;-<span class="st"> </span>pipeline_operators <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(Operator_General) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Sum_Gallons =</span> <span class="kw">sum</span>(Barrels_Gallons)) <span class="op">%&gt;%</span>
@@ -417,6 +411,9 @@ pipeline_spills &lt;-<span class="st"> </span>pipeline_spills &lt;-<span class="
 <span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="dt">guide =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Which Corporations Spilled the Most Oil?&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Barplot representing the total gallons of oil released by most culpable corporations from 2010-present.&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total Oil Released (Gallons)&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Corporation Name&quot;</span>)</code></pre></div>
 <p><img src="more_info_files/figure-html/unnamed-chunk-4-1.png" width="960" /></p>
+</div>
+<div id="pipeline-spills-and-overall-pollution" class="section level1">
+<h1>Pipeline Spills and Overall Pollution</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollution &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;pollution.xlsx&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> Date_Local, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Month&quot;</span>, <span class="st">&quot;Day&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>, 
            <span class="dt">convert =</span> <span class="ot">FALSE</span>, <span class="dt">extra =</span> <span class="st">&quot;warn&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;warn&quot;</span>) <span class="op">%&gt;%</span>
@@ -440,7 +437,7 @@ pipeline_spills_sf &lt;-<span class="st"> </span>pipeline_spills <span class="op
 <span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">4326</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Relationship Between Pollution Levels and Pipeline Spills&quot;</span>, 
        <span class="dt">subtitle =</span> <span class="st">&quot;Mean nitrogen dioxide release by county from 2000-2016, plotted against occurrances of oil pipeline spills from 2010-present&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Mean NO2 Release (Parts Per Billion&quot;</span>)</code></pre></div>
-<p><img src="more_info_files/figure-html/unnamed-chunk-5-1.png" width="1152" /></p>
+<p><img src="more_info_files/figure-html/unnamed-chunk-5-1.png" width="1344" /></p>
 </div>
 
 
