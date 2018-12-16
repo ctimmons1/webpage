@@ -21,11 +21,14 @@ knitr::opts_chunk$set(
 <!--
 Comments in HTML are like this! 
 -->
+# Background
+
+America has the leading amount of oil pipelines in the world, with over two hundred thousand miles of liquids pipelines total. Yet we often don’t hear about issues with these pipelines unless they are severe enough to make a major news story.
+
 
 # An Introduction to Pipeline Spills and Their Environmental Impact
 
-One can visualize where these spills are occuring, what caused them, which corporations are causing them, how severe the spill itself was, and begin to glimpse the environmental repercussions. The viewer should note that radii on both maps denote values relative to other values on the same map, not on the other map. For instance, radii on the basemap showing the environmental remediation costs for each oil spill represent the dollar amount which was divided by 100, for clarity, while radii on the oil release map correspond to the gallons of oil released by each pipeline spill. To continue exploring questions of environmental repercussions and corporate accountability, keep reading!
-
+Using data provided by the U.S Department of Transportation, the below map offers a primer on the scope and scale of oil spills that occurred in the U.S between 2010 and 2017. Hovering and clicking on the data points shows you where the spill occurred and which corporation was responsible. The radii on the basemap showing the ecological repercussions for each spill represent the cost of environmental remediation, divided by 100 for clarity. Radii on the oil release basemap correspond to the gallons of oil released by each pipeline spill, divided by 2, also for clarity. Viewers should note that radii on each map denote the relative sizes of values on the same basemap, not on the other. To keep learning about environmental repercussions and corporate accountability for pipeline spills, click on the ‘More Info’ tab!
 
 ``` {r, echo =TRUE, message =FALSE, warning =FALSE}
 library(tidyverse)
@@ -76,7 +79,7 @@ leaflet(data = pipeline_spills) %>%
              opacity = 0.8,
              group = "Environmental Remediation Costs ($)") %>%
   addCircles(lng = ~Longitude, lat = ~Latitude, 
-             radius = ~Barrels_Gallons,
+             radius = ~Barrels_Gallons/2,
              color = ~pal_1(Cause_Category),
              popup = ~Operator_Name,
              label = ~Accident_Location,

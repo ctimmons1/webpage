@@ -27,7 +27,8 @@ Comments in HTML are like this!
 
 # "Liquid Gold": Oil's Expense On the Environment
 
-Write your "more information" section here.
+The following scatterplot demonstrates how, for a representative sample of pipeline spills, the amount of oil released in the spill directly correlates to the costs paid out by the responsible corporation to repair environmental damage. This reinforces what is already known about the severe damage that oil poses to ecological systems, and shows that the amount of oil released can be used as another proxy by which to quantify the environmental hazard of any particular pipeline spill. 
+
 
 ``` {r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 10, fig.height = 10}
 library(tidyverse)
@@ -69,7 +70,7 @@ pipeline_operators <- pipeline_spills %>%
   filter(n_spills > 5) %>%
   inner_join(pipeline_spills, by = "Operator_General") 
 
-ggplot(data = pipeline_operators, mapping = aes(x = Barrels_Gallons, y = Environmental_Remediation_Costs)) +
+ggplot(data = pipeline_spills, mapping = aes(x = Barrels_Gallons, y = Environmental_Remediation_Costs)) +
   geom_jitter(width = 0.3, height = 0.3, alpha = 0.7) +
   geom_smooth(method = lm) +
   scale_y_log10() +
@@ -80,6 +81,8 @@ Regression line demonstrates positive trend.", x = "Oil Released (Gallons)", y =
 ```
 
 # Who Is Responsible for the Environmental Damage?
+
+We already saw in an initial map some of the corporations responsible for pipeline spills between 2010 and 2017. But not all of these companies are contributing equally to environmental damage. The following barplot reveals the corporations most culpable for environmental damage, by calculating the total amount of oil they have released into the environment. All of these companies experienced more than 5 spills in this timeframe, already increasing their accountability for this kind of pollution. Be sure to note the scale on the x-axis, which represents the total gallons of oil released into the environment. The numbers are quite large, which means that even corporations with the smallest bars are still causing a significant amount of pollution. 
 
 ```{r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 10, fig.height = 8}
 
@@ -100,14 +103,18 @@ ggplot(data = pipeline_barrels, mapping = aes(x = Operator_General, y = Sum_Gall
 
 # Pipeline Spills and Overall Pollution
 
+We then wanted to examine how these pipeline spills fit in with the larger scheme of pollution in different areas around the country. This information is relevant given the far-reaching and long-lasting effects of pipeline spills; they may be contributing to or worsening existing pollution. The following map uses data collected from the U.S Environmental Protection Agency to map the total ozone release levels (in blue) by county between 2000 and 2016. The units “parts per billion” is a measure of volume which denotes the concentration of pollutants in the air. Pipeline spills are marked by pink points.
+
+Although the pollution data does not represent every county, we can see that especially on the West coast, areas with many oil spills overlap with high levels of pollution, meaning that these pipelines are damaging an already damaged system. Moreover, in less-populated areas of the country with relatively high ozone release levels, it is likely that these pipelines are a significant contributor to that pollution. 
+
 
 ``` {r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 14, fig.height = 14}
 
 pollution <- read_excel("pollution.xlsx") %>%
   separate(col = Date_Local, into = c("Year", "Month", "Day"), sep = "-", 
            convert = FALSE, extra = "warn", fill = "warn") %>%
-  group_by(County, Year) %>%
-  summarize(mean_NO2 = mean(NO2_Mean)) %>%
+  group_by(County) %>%
+  summarize(Sum_O3 = sum(O3_Mean)) %>%
   right_join(us_counties, by = "County") %>%
   select(-c(name, state_abbr)) %>%
   drop_na()
@@ -118,13 +125,13 @@ pipeline_spills_sf <- pipeline_spills %>%
 
 ggplot() +
   geom_sf(data = USA_sf) +
-  geom_sf(data = pollution, aes(fill = mean_NO2)) +
-  scale_fill_continuous(low = "yellow", high = "darkred", 
+  geom_sf(data = pollution, aes(fill = Sum_O3)) +
+  scale_fill_continuous(low = "lightblue3", high = "navy", 
                         space = "Lab", na.value = "white",         
                         guide = "colourbar", aesthetics = "fill") +
-  geom_sf(data = pipeline_spills_sf, size = 0.5, col = "blue") +
+  geom_sf(data = pipeline_spills_sf, size = 0.7, col = "deeppink2") +
   coord_sf(crs = 4326) +
   labs(title = "Relationship Between Pollution Levels and Pipeline Spills", 
-       subtitle = "Mean nitrogen dioxide release by county from 2000-2016, plotted against occurrances of oil pipeline spills from 2010-present", x = "Longitude", y = "Latitude", fill = "Mean NO2 Release (Parts Per Billion")
+       subtitle = "Total ozone release by county from 2000-2016, plotted against occurrances of oil pipeline spills from 2010-present", x = "Longitude", y = "Latitude", fill = "Total O3 Release (Parts Per Billion)")
 
 ```
