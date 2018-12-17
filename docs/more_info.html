@@ -313,7 +313,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Final Project Title</a>
+      <a class="navbar-brand" href="index.html">The Environmental Impact of Oil Pipeline Spills</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -345,7 +345,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">The Environmental Impact of Oil Pipeline Spills</h1>
 <h4 class="author"><em>Caitlin Timmons, Sarah Weden, Kendall Al-Bashir</em></h4>
-<h4 class="date"><em>Last updated on 2018-12-16</em></h4>
+<h4 class="date"><em>Last updated on 2018-12-17</em></h4>
 
 </div>
 
@@ -362,6 +362,7 @@ Comments in HTML are like this!
 <span class="kw">library</span>(readxl)
 <span class="kw">library</span>(maps)
 <span class="kw">library</span>(USAboundaries)
+<span class="kw">library</span>(scales)
 
 us_counties &lt;-<span class="st"> </span><span class="kw">us_counties</span>(<span class="dt">map_date =</span> <span class="ot">NULL</span>, <span class="dt">resolution =</span> <span class="kw">c</span>(<span class="st">&quot;high&quot;</span>), <span class="dt">states =</span> <span class="ot">NULL</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(name, state_abbr) <span class="op">%&gt;%</span>
@@ -389,17 +390,17 @@ pipeline_spills &lt;-<span class="st"> </span>pipeline_spills &lt;-<span class="
 <span class="st">  </span><span class="kw">inner_join</span>(pipeline_spills, <span class="dt">by =</span> <span class="st">&quot;Operator_General&quot;</span>) 
 
 <span class="kw">ggplot</span>(<span class="dt">data =</span> pipeline_spills, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Barrels_Gallons, <span class="dt">y =</span> Environmental_Remediation_Costs)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.3</span>, <span class="dt">height =</span> <span class="fl">0.3</span>, <span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.3</span>, <span class="dt">height =</span> <span class="fl">0.3</span>, <span class="dt">alpha =</span> <span class="fl">0.6</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_log10</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">label=</span>comma) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>(<span class="dt">label=</span>comma) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correlation between amount of oil spillage and cost to the environment&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Gallons of oil released in each pipeline spill versus the environmental remediation costs of the spill. </span>
 <span class="st">Regression line demonstrates positive trend.&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Oil Released (Gallons)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Environmental Remediation Costs ($)&quot;</span>)</code></pre></div>
 <p><img src="more_info_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
 </div>
 <div id="who-is-responsible-for-the-environmental-damage" class="section level1">
 <h1>Who Is Responsible for the Environmental Damage?</h1>
-<p>We already saw in an initial map some of the corporations responsible for pipeline spills between 2010 and 2017. But not all of these companies are contributing equally to environmental damage. The following barplot reveals the corporations most culpable for environmental damage, by calculating the total amount of oil they have released into the environment. All of these companies experienced more than 5 spills in this timeframe, already increasing their accountability for this kind of pollution. Be sure to note the scale on the x-axis, which represents the total gallons of oil released into the environment. The numbers are quite large, which means that even corporations with the smallest bars are still causing a significant amount of pollution.</p>
+<p>We already explored in our initial map some of the corporations which are causing pipeline spills. But not all of these companies are contributing equally to environmental damage. The following barplot reveals the corporations most culpable for environmental damage, by calculating the total amount of oil they have released into the environment. All of these companies are “repeat offenders,” given that they caused more than 5 spills in this timeframe. Be sure to note the scale on the x-axis, which represents the total gallons of oil released into the environment. The numbers are quite large, meaning even corporations with the smallest bars are still causing significant pollution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pipeline_barrels &lt;-<span class="st"> </span>pipeline_operators <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(Operator_General) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Sum_Gallons =</span> <span class="kw">sum</span>(Barrels_Gallons)) <span class="op">%&gt;%</span>
@@ -415,8 +416,8 @@ pipeline_spills &lt;-<span class="st"> </span>pipeline_spills &lt;-<span class="
 </div>
 <div id="pipeline-spills-and-overall-pollution" class="section level1">
 <h1>Pipeline Spills and Overall Pollution</h1>
-<p>We then wanted to examine how these pipeline spills fit in with the larger scheme of pollution in different areas around the country. This information is relevant given the far-reaching and long-lasting effects of pipeline spills; they may be contributing to or worsening existing pollution. The following map uses data collected from the U.S Environmental Protection Agency to map the total ozone release levels (in blue) by county between 2000 and 2016. The units “parts per billion” is a measure of volume which denotes the concentration of pollutants in the air. Pipeline spills are marked by pink points.</p>
-<p>Although the pollution data does not represent every county, we can see that especially on the West coast, areas with many oil spills overlap with high levels of pollution, meaning that these pipelines are damaging an already damaged system. Moreover, in less-populated areas of the country with relatively high ozone release levels, it is likely that these pipelines are a significant contributor to that pollution.</p>
+<p>We then wanted to examine how these pipeline spills fit in with the larger scheme of pollution in different areas of the country. This information is relevant given the far-reaching and long-lasting effects of pipeline spills; they may be contributing to or worsening existing pollution. <strong>The following map uses data collected from the U.S Environmental Protection Agency to map the total ozone release levels (in blue) by county between 2000 and 2016.</strong> Note that the unit “parts per billion” is a measure of volume which denotes the concentration of pollutants in the air. Pipeline spills are marked by pink dots.</p>
+<p>Although not representative of every county, we can see that especially on the West coast, areas with significant oil spills overlap with high levels of pollution, meaning that these pipelines are damaging an already damaged system. Moreover, in underdeveloped areas of the country with higher ozone release levels, it is likely that these pipelines are contributing significantly to that pollution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollution &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;pollution.xlsx&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> Date_Local, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Month&quot;</span>, <span class="st">&quot;Day&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>, 
            <span class="dt">convert =</span> <span class="ot">FALSE</span>, <span class="dt">extra =</span> <span class="st">&quot;warn&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;warn&quot;</span>) <span class="op">%&gt;%</span>
@@ -441,6 +442,11 @@ pipeline_spills_sf &lt;-<span class="st"> </span>pipeline_spills <span class="op
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Relationship Between Pollution Levels and Pipeline Spills&quot;</span>, 
        <span class="dt">subtitle =</span> <span class="st">&quot;Total ozone release by county from 2000-2016, plotted against occurrances of oil pipeline spills from 2010-present&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Total O3 Release (Parts Per Billion)&quot;</span>)</code></pre></div>
 <p><img src="more_info_files/figure-html/unnamed-chunk-5-1.png" width="1344" /></p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>We’ve learned that despite a lack of thorough media coverage, oil spills in the U.S are very prevalent, with far-reaching environmental impacts. Corporations have been spilling hundreds of thousands of of gallons of oil into the environment, and despite paying out huge sums of money for environmental remediation, their cleanup efforts are often incomplete This leads to long-term ecological damage and increased overall pollution levels. Moreover, many of these corporations are “repeat offenders;” Enterprise alone caused 154 spills from 2010-2017. And with the U.S rising to the world’s largest oil producer, these spills will continue to happen.</p>
+<p>If you’re motivated to fight back against the corporations harming the environment, consider donating or volunteering to support organizations like the Water Is Life Movement, League of Conservation Voters, the Sierra Club, and the U.S Climate Action Network, among others.</p>
 </div>
 
 

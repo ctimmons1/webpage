@@ -23,12 +23,15 @@ Comments in HTML are like this!
 -->
 # Background
 
-America has the leading amount of oil pipelines in the world, with over two hundred thousand miles of liquids pipelines total. Yet we often don’t hear about issues with these pipelines unless they are severe enough to make a major news story.
+[hook?!]  America has the leading amount of oil pipelines in the world, with over two hundred thousand miles of liquids pipelines total. Yet we often don’t hear about issues with these pipelines unless they are severe enough to make a major news story. **We sought to understand the scope of the environmental damage caused by these pipeline spills, and who is responsible for them.** 
+
 
 
 # An Introduction to Pipeline Spills and Their Environmental Impact
 
-Using data provided by the U.S Department of Transportation, the below map offers a primer on the scope and scale of oil spills that occurred in the U.S between 2010 and 2017. Hovering and clicking on the data points shows you where the spill occurred and which corporation was responsible. The radii on the basemap showing the ecological repercussions for each spill represent the cost of environmental remediation, divided by 100 for clarity. Radii on the oil release basemap correspond to the gallons of oil released by each pipeline spill, divided by 2, also for clarity. Viewers should note that radii on each map denote the relative sizes of values on the same basemap, not on the other. To keep learning about environmental repercussions and corporate accountability for pipeline spills, click on the ‘More Info’ tab!
+**Using data provided by the U.S Department of Transportation**, the below map offers a primer on oil spills in the U.S between 2010 and 2017, focusing on the ecological repercussions of each spill and who is accountable for them. Hovering and clicking on the data points shows you where the spill occurred and which corporation was responsible. The radii on the Environmental Remediation Costs basemap represent the costs paid out by the corporation to repair environmental damage. Each dollar amount was divided by 100 for clarity. Radii on the Oil Release basemap correspond to the gallons of oil released by each pipeline spill, divided by 2, also for clarity. **Viewers should note that radii on each map denote the relative sizes of values on the same basemap, not on the other.**
+
+To keep learning about environmental repercussions and corporate accountability for pipeline spills, click on the ‘More Info’ tab!
 
 ``` {r, echo =TRUE, message =FALSE, warning =FALSE}
 library(tidyverse)
@@ -37,6 +40,7 @@ library(sf)
 library(readxl)
 library(maps)
 library(USAboundaries)
+library(scales)
 
 us_counties <- us_counties(map_date = NULL, resolution = c("high"), states = NULL) %>%
   select(name, state_abbr) %>%
