@@ -1,5 +1,5 @@
 ---
-title: "The Environmental Impact of Oil Pipeline Spills"
+title: "America’s Leaky Pipes: The Environmental Impact of Oil Pipeline Spills"
 author: "Caitlin Timmons, Sarah Weden, Kendall Al-Bashir"
 date: "Last updated on `r Sys.Date()`"
 output:
@@ -18,18 +18,15 @@ knitr::opts_chunk$set(
   fig.width = 16/2, fig.height = 9/2)
 ```
 
-<!--
-Comments in HTML are like this! 
--->
 # Background
 
-[hook?!]  America has the leading amount of oil pipelines in the world, with over two hundred thousand miles of liquids pipelines total. Yet we often don’t hear about issues with these pipelines unless they are severe enough to make a major news story. **We sought to understand the scope of the environmental damage caused by these pipeline spills, and who is responsible for them.** 
-
+America has the leading amount of pipelines in the world, with a whopping 70 thousand miles of crude oil pipelines, which could circle the Earth nearly three times over.^[Moon, Emily. 2017, Nov 17. After the Latest Leak in South Dakota, How Safe are America’s Pipelines? Retrieved from https://psmag.com/environment/how-safe-are-americas-pipelines] Despite this, we often don’t hear about issues with these pipelines unless they are severe enough to make a major news story. However, all pipeline spills and accidents must be considered in order to see the full picture of oil production and maintenance in the U.S. **We sought to understand the scope of the environmental damage caused by these pipeline spills, and who is responsible for them.** 
 
 
 # An Introduction to Pipeline Spills and Their Environmental Impact
 
-**Using data provided by the U.S Department of Transportation**, the below map offers a primer on oil spills in the U.S between 2010 and 2017, focusing on the ecological repercussions of each spill and who is accountable for them. Hovering and clicking on the data points shows you where the spill occurred and which corporation was responsible. The radii on the Environmental Remediation Costs basemap represent the costs paid out by the corporation to repair environmental damage. Each dollar amount was divided by 100 for clarity. Radii on the Oil Release basemap correspond to the gallons of oil released by each pipeline spill, divided by 2, also for clarity. **Viewers should note that radii on each map denote the relative sizes of values on the same basemap, not on the other.**
+Using data provided by the U.S Department of Transportation,^[Oil Pipeline Accidents, 2010-Present.Retrieved from https://www.kaggle.com/usdot/pipeline-accidents] the below map offers a primer on oil spills in the U.S between 2010 and 2017, focusing on the ecological repercussions of each spill and who is accountable for them. Hovering and clicking on the data points shows you where the spill occurred and which corporation was responsible. The radii on the Environmental Remediation Costs basemap represent the costs paid out by the corporation to repair environmental damage. Each dollar amount was divided by 100 for clarity. Radii on the Oil Release basemap correspond to the gallons of oil released by each pipeline spill, divided by 2, also for clarity. **Viewers should note that radii on each map denote the relative sizes of values on the same basemap, not on the other.** 
+
 
 To keep learning about environmental repercussions and corporate accountability for pipeline spills, click on the ‘More Info’ tab!
 
@@ -42,18 +39,9 @@ library(maps)
 library(USAboundaries)
 library(scales)
 
-us_counties <- us_counties(map_date = NULL, resolution = c("high"), states = NULL) %>%
-  select(name, state_abbr) %>%
-  mutate("State_ID" = state_abbr, "County" = name) %>%
-  filter(State_ID != "GU", State_ID != "VI", State_ID != "PR", State_ID != "AS", State_ID != "MP", State_ID != "HI", State_ID != "AK") 
-
-
-USA_sf <- maps::map("state", plot = FALSE, fill = TRUE) %>%
-  sf::st_as_sf() %>%
-  sf::st_transform(4326) %>%
-  mutate("State" = ID) %>%
-  select(-ID)
-
+# Imports pipeline spills dataset from U.S Dept. of Transportation.
+# In mutate(), we chose to convert the amount of oil released from barrels to gallons, to make the numbers more intuitive.
+# Call to separate() prevents corporations with multiple variations on their names from being read as distinct entities.
 
 pipeline_spills <- pipeline_spills <- read_excel("database.xlsx") %>%
   unite(col = "Accident_Location", c("Accident_City", "Accident_State"), sep = ", ", remove = FALSE) %>%
@@ -66,6 +54,11 @@ pipeline_spills <- pipeline_spills <- read_excel("database.xlsx") %>%
 
 
 ``` {r, echo =TRUE, message =FALSE, warning =FALSE, fig.width = 8, fig.height = 8}
+
+# Palette creates color scheme in legend.
+# addLayersControl() creates two basemaps for users to toggle between. 
+# Arguments for radius in addCircles() were divided proportionally for clarity; this is acceptable because the primary purpose of the radii is to view the values in relation to other values on the same map, not to understand exactly what value the size corresponds to. 
+
 pal_1 <- colorFactor(palette = "Set1", domain = pipeline_spills$Cause_Category)
 
 leaflet(data = pipeline_spills) %>%

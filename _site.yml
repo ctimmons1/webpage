@@ -14,7 +14,7 @@ output:
     self_contained: no
 # All fa icons were obtained from https://fontawesome.com/icons?d=gallery
 navbar:
-  title: "The Environmental Impact of Oil Pipeline Spills"
+  title: "America’s Leaky Pipes"
   left:
     - text: "Blogpost"
       href: index.html
